@@ -66,4 +66,22 @@ class ConfigTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Incorrect properties input.");
     }
+
+    @Test
+    public void whenDoNotHaveEqualSymbol() {
+        String path = "./data/do_not_have_equal_symbol.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Incorrect properties input.");
+    }
+
+    @Test
+    public void whenEqualSymbolsAtEnd() {
+        String path = "./data/equal_symbols_at_end.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Incorrect properties input.");
+    }
 }

@@ -19,10 +19,9 @@ public class Config {
         try (BufferedReader in = new BufferedReader(
                 new FileReader(this.path))) {
             in.lines()
-                    .filter(line -> !line.startsWith("#"))
-                    .filter(line -> !"".equals(line))
+                    .filter(line -> !line.isBlank() && !line.startsWith("#"))
                     .filter(line -> {
-                        if (line.startsWith("=")
+                        if (!line.contains("=") || line.startsWith("=")
                                 || line.endsWith("=")) {
                             throw new IllegalArgumentException("Incorrect properties input.");
                         }
