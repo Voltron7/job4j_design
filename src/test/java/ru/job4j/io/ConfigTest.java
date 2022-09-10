@@ -80,8 +80,8 @@ class ConfigTest {
     public void whenEqualSymbolsAtEnd() {
         String path = "./data/equal_symbols_at_end.properties";
         Config config = new Config(path);
-        assertThatThrownBy(config::load)
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Incorrect properties input.");
+        config.load();
+        assertThat(config.value("name")).isEqualTo("Valeri");
+        assertThat(config.value("surname")).isEqualTo("Shpakowski=1=");
     }
 }

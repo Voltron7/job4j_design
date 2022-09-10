@@ -22,8 +22,7 @@ public class Config {
                     .filter(line -> !line.isBlank() && !line.startsWith("#"))
                     .filter(line -> {
                         if (!line.contains("=") || line.startsWith("=")
-                                || line.indexOf("=") == line.length() - 1
-                                || line.indexOf("=") != line.lastIndexOf("=")) {
+                                || line.indexOf("=") == line.length() - 1) {
                             throw new IllegalArgumentException("Incorrect properties input.");
                         }
                         return true;
