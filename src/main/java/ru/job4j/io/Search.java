@@ -21,11 +21,11 @@ public class Search {
     }
 
     private static String[] validation(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Root folder is null. Usage ROOT_FOLDER.");
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Root folder is null.");
         }
-        if (!args[1].startsWith(".csv")) {
-            throw new IllegalArgumentException("The file must starts with \".csv\"");
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("The file must starts with \".\"");
         }
         Path start = Paths.get(args[0]);
         if (!start.toFile().exists()) {
