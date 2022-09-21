@@ -17,11 +17,7 @@ public class ArgsName {
     private void parse(String[] args) {
         Arrays.stream(args)
                 .filter(line -> {
-                    if (!line.startsWith("-") || line.startsWith("-=")
-                            || !line.contains("=")
-                            || line.indexOf("=") == line.length() - 1) {
-                        throw new IllegalArgumentException("The argument does not match the pattern \"-key=value\"");
-                    }
+                    argsValidation(line);
                     return true;
                 })
                 .map(line -> line.split("=", 2))
@@ -35,6 +31,21 @@ public class ArgsName {
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
+    }
+
+    private void argsValidation(String args) {
+        if (!args.startsWith("-")) {
+            throw new IllegalArgumentException("The string does not start with \"-\"");
+        }
+        if (args.startsWith("-=")) {
+            throw new IllegalArgumentException("The key does not exist");
+        }
+        if (!args.contains("=")) {
+            throw new IllegalArgumentException("The equal symbol does not exist");
+        }
+        if (args.indexOf("=") == args.length() - 1) {
+            throw new IllegalArgumentException("The value does not exist");
+        }
     }
 
     public static void main(String[] args) {
