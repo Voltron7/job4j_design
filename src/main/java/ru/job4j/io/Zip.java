@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -23,7 +24,7 @@ public class Zip {
         }
     }
 
-    private static ArgsName zipValidation(String[] args) {
+    private static boolean zipValidation(String[] args) {
         if (args.length != 3) {
             throw new IllegalArgumentException("Root folder is null.");
         }
@@ -40,7 +41,7 @@ public class Zip {
         if (!Path.of(argsName.get("d")).toFile().isDirectory()) {
             throw new IllegalArgumentException("The directory does not exist");
         }
-        return argsName;
+        return true;
     }
 
     public void packSingleFile(File source, File target) {
@@ -54,11 +55,19 @@ public class Zip {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Zip zip = new Zip();
         zip.packSingleFile(
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
+        ArgsName argsName = ArgsName.of(args);
+        if (zipValidation(args)) {
+            Path path = Paths.get(argsName.get("d"));
+            List<Path> sources = Search.search(path, p ->
+                    !p.toFile().getName().endsWith(argsName.get("e")));
+            File out = Paths.get(argsName.get("o")).toFile();
+            zip.packFiles(sources, out);
+        }
     }
 }
