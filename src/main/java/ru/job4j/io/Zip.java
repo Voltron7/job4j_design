@@ -24,11 +24,7 @@ public class Zip {
         }
     }
 
-    private static boolean zipValidation(String[] args) {
-        if (args.length != 3) {
-            throw new IllegalArgumentException("Root folder is null.");
-        }
-        ArgsName argsName = ArgsName.of(args);
+    private static boolean zipValidation(ArgsName argsName) {
         if (!argsName.get("e").startsWith(".")) {
             throw new IllegalArgumentException("The file must starts with \".\"");
         }
@@ -56,13 +52,16 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Root folder is null.");
+        }
         Zip zip = new Zip();
         zip.packSingleFile(
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
         ArgsName argsName = ArgsName.of(args);
-        if (zipValidation(args)) {
+        if (zipValidation(argsName)) {
             Path path = Paths.get(argsName.get("d"));
             List<Path> sources = Search.search(path, p ->
                     !p.toFile().getName().endsWith(argsName.get("e")));
