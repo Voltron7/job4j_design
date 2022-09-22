@@ -18,36 +18,42 @@ public class ConsoleChat {
     }
 
     public void run() {
-        String expression;
+        List<String> temp = readPhrases();
+        String expression = "";
         System.out.println("You are in ConsoleChat! Commands: pause, continue, exit.");
         System.out.print("Ask your question or write a command: ");
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in))) {
+            while (!OUT.equals(expression)) {
             expression = reader.readLine();
             saveLog(expression);
             switch (expression) {
-                case STOP:
-                    System.out.println("You have to write a command \"continue\" to get an answer");
-                    System.out.println("or you may go on to ask questions without an answers or just to exit");
-                    expression = reader.readLine();
-                    saveLog(expression);
-                case CONTINUE:
-                    run();
-                    break;
                 case OUT:
                     System.exit(0);
                     break;
+                case STOP:
+                    System.out.println("You have to write a command \"continue\" to get an answer");
+                    System.out.println("or you may go on to ask questions without an answers or just to exit");
+                    do {
+                        expression = reader.readLine();
+                        saveLog(expression);
+                    } while (!CONTINUE.equals(expression));
+                case CONTINUE:
+                    System.out.print("Ask your question or write a command again: ");
+                    expression = reader.readLine();
+                    saveLog(expression);
                 default:
-                    String answer = readPhrases()
-                        .get((int) (Math.random() * readPhrases().size()));
+                    String answer = temp.get((int) (Math.random() * temp.size()));
                     System.out.println("Answer is " + answer);
                     saveLog(answer);
-                    run();
+                    System.out.print("Ask your question or write a command again: ");
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private List<String> readPhrases() {
         List<String> answers = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(

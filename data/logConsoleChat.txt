@@ -1,9 +1,13 @@
 
-?
-no
 pause
+?
+?
 ?
 continue
 ?
+yes
+?
 may be
+?
+yes
 exit
