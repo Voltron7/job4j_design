@@ -6,32 +6,27 @@ import java.util.*;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
-        List<String> filteredList = List.of(argsName.get("filter").split(","));
-        List<Integer> indexes = new ArrayList<>();
-        try (var scanner = new Scanner(Paths.get(argsName.get("path")))) {
-            String[] headerArray = scanner.nextLine().split(argsName.get("delimiter"));
-            for (int i = 0; i < headerArray.length; i++) {
-                if (filteredList.contains(headerArray[i])) {
-                    indexes.add(i);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        String[] filteredList = argsName.get("filter").split(",");
+        int[] indexArray = new int[filteredList.length];
         try (PrintWriter out = new PrintWriter(new FileOutputStream(argsName.get("out")));
                 Scanner scanner = new Scanner(Paths.get(argsName.get("path")))) {
             while (scanner.hasNextLine()) {
                 StringBuilder builder = new StringBuilder();
                 String[] lines = scanner.nextLine().split(argsName.get("delimiter"));
-                for (Integer index : indexes) {
-                    builder.append(lines[index]).append(";");
+                for (int i = 0; i < filteredList.length; i++) {
+                    for (int j = 0; j < lines.length; j++) {
+                        if (filteredList[i].equals(lines[j])) {
+                            indexArray[i] = j;
+                            break;
+                        }
+                    }
                 }
-                builder.setLength(builder.length() - 1);
+                for (int i = 0; i < indexArray.length; i++) {
+                    builder.append(lines[indexArray[i]])
+                            .append(i == indexArray.length - 1 ? "" : argsName.get("delimiter"));
+                }
                 out.println(builder);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 

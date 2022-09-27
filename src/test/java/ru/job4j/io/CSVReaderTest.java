@@ -47,15 +47,15 @@ class CSVReaderTest {
         File target = folder.resolve("target.csv").toFile();
         ArgsName argsName = ArgsName.of(new String[]{
                 "-path=" + file.getAbsolutePath(), "-delimiter=;",
-                "-out=" + target.getAbsolutePath(), "-filter=age,last_name,education"
+                "-out=" + target.getAbsolutePath(), "-filter=education,age,last_name"
         });
         Files.writeString(file.toPath(), data);
         String expected = String.join(
                 System.lineSeparator(),
-                "age;last_name;education",
-                "20;Smith;Bachelor",
-                "25;Johnson;Undergraduate",
-                "30;Brown;Secondary special"
+                "education;age;last_name",
+                "Bachelor;20;Smith",
+                "Undergraduate;25;Johnson",
+                "Secondary special;30;Brown"
         ).concat(System.lineSeparator());
         CSVReader.handle(argsName);
         assertThat(Files.readString(target.toPath())).isEqualTo(expected);
