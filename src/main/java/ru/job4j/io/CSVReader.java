@@ -25,7 +25,11 @@ public class CSVReader {
                     builder.append(lines[indexArray[i]])
                             .append(i == indexArray.length - 1 ? "" : argsName.get("delimiter"));
                 }
-                out.println(builder);
+                if ("stdout".equals(argsName.get("out"))) {
+                    System.out.println(builder);
+                } else {
+                        out.println(builder);
+                }
             }
         }
     }
