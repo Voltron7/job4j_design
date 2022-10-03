@@ -16,9 +16,9 @@ public class EchoServer {
                     String reader = in.readLine();
                     if (reader.contains("?msg=Exit")) {
                         server.close();
-                    } else if (reader.contains("msg=Hello")) {
+                    } else if (reader.contains("?msg=Hello")) {
                         out.write("Hello\r\n\r\n".getBytes());
-                    } else if (reader.contains("msg=Any")) {
+                    } else if (reader.contains("?msg=Any")) {
                         out.write("What\r\n\r\n".getBytes());
                     }
                     out.flush();
