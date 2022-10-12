@@ -39,8 +39,8 @@ public class Main {
                         + "{"
                         + "\"phone\":\"+7(911)777-777-77-77\""
                         + "},"
-                        + "\"statuses\":"
-                        + "[\"Junior\",\"FreeSoul\"]"
+                        + "\"skills\":"
+                        + "[\"Python\",\"Django\"]"
                         + "}";
         final Person2 personMod2 = gson2.fromJson(personJson2, Person2.class);
         System.out.println(personMod2);

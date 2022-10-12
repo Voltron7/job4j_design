@@ -7,7 +7,7 @@ public class Person2 {
     private final boolean sex;
     private final int age;
     private final Contact contact;
-    private final String[] statuses;
+    private final String[] skills;
 
 
     public Person2(String name, boolean sex, int age, Contact contact, String[] skills) {
@@ -15,7 +15,7 @@ public class Person2 {
         this.sex = sex;
         this.age = age;
         this.contact = contact;
-        this.statuses = skills;
+        this.skills = skills;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Person2 {
                 + ", sex=" + sex
                 + ", age=" + age
                 + ", contact=" + contact
-                + ", statuses=" + Arrays.toString(statuses)
+                + ", skills=" + Arrays.toString(skills)
                 + '}';
     }
 }
