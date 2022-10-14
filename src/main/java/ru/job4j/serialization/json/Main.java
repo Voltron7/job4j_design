@@ -2,6 +2,10 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,5 +48,28 @@ public class Main {
                         + "}";
         final Person2 personMod2 = gson2.fromJson(personJson2, Person2.class);
         System.out.println(personMod2);
+
+        /* JSONObject из json-строки */
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"77-777-77\"}");
+
+        /* JSONArray из ArrayList */
+        List<String> list = new ArrayList<>();
+        list.add("Developer");
+        list.add("FreeSoul");
+        JSONArray jsonStatuses = new JSONArray(list);
+
+        /* JSONObject напрямую методом put */
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", person2.getName());
+        jsonObject.put("sex", person2.isSex());
+        jsonObject.put("age", person2.getAge());
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("statuses", jsonStatuses);
+
+        /* Выведем результат в консоль */
+        System.out.println(jsonObject);
+
+        /* Преобразуем объект person2 в json-строку */
+        System.out.println(new JSONObject(person2));
     }
 }

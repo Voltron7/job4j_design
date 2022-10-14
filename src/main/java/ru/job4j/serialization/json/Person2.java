@@ -18,6 +18,26 @@ public class Person2 {
         this.skills = skills;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getSkills() {
+        return skills;
+    }
+
     @Override
     public String toString() {
         return "Person2{"
