@@ -40,8 +40,9 @@ public class Searcher {
         if (argsName.get("n").isEmpty()) {
             throw new IllegalArgumentException("The pattern is empty");
         }
-        if (argsName.get("t").isEmpty()) {
-            throw new IllegalArgumentException("The type of pattern is empty");
+        if (!(argsName.get("t").equals("name") || argsName.get("t").equals("mask")
+                || argsName.get("t").equals("regex"))) {
+            throw new IllegalArgumentException("The type of pattern is invalid");
         }
         if (argsName.get("o").isEmpty()) {
             throw new IllegalArgumentException("The save file is empty");
