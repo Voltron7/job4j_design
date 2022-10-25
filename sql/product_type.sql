@@ -41,23 +41,23 @@ select * from product where expired_date < current_date;
 select name, price from product as p
 where price = (select max(price) from product);
 
-select t.name as "Product's_type",
+select t.name as "Product''s_type",
 count(p.name) as "Amount" from product as p
 inner join type as t on p.type_id = t.id
 group by t.name;
 
-select p.name as "Product's name",
-t.name as "Product's_type" from product as p
+select p.name as "Product''s name",
+t.name as "Product''s_type" from product as p
 inner join type as t on p.type_id = t.id
 where t.name = 'cheese' or t.name ='milk';
 
-select t.name as "Product's_type",
+select t.name as "Product''s_type",
 count(t.name) as "Amount" from product as p
 inner join type as t on p.type_id = t.id
 group by t.name
 having count(t.name) < 10;
 
-select p.name as "Product's_name", t.name as "Product's_type"
+select p.name as "Product''s_name", t.name as "Product''s_type"
 from product p, type t
 where p.type_id = t.id;
 
