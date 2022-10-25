@@ -30,7 +30,7 @@ full join employees as e on e.departments_id = d.id;
 
 select * from departments as d cross join employees as e;
 
-select d.name as "Department's_name"
+select d.name as "Department''s_name"
 from departments as d
 left join employees as e on e.departments_id = d.id
 where e.name is null;
