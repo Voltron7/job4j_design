@@ -69,4 +69,4 @@ create trigger update
    for each row
    execute procedure history_trigger();
 
-insert into history_of_price (name, price, current_date) VALUES ('product_7', 7, 2022-10-26);
+insert into history_of_price (name, price, date) VALUES ('product_7', 7, 2022-10-26);
