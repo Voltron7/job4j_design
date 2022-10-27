@@ -23,7 +23,6 @@ $$
 		if d_price > 1000 THEN
              delete from products where id = 6;
         end if;
-		return result;
     end;
 $$;
 
