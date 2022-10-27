@@ -1,6 +1,7 @@
 create or replace procedure delete_data(d_id integer)
 language 'plpgsql'
-as $$
+as 
+$$
    BEGIN
       if d_id > 10 THEN
           delete from products where price > 10000;
@@ -11,7 +12,7 @@ $$;
 call delete_data(777);
 
 create or replace function f_delete_data(d_count integer, d_price integer)
-returns integer
+returns void
 language 'plpgsql'
 as
 $$
