@@ -16,8 +16,6 @@ returns void
 language 'plpgsql'
 as
 $$
-    declare
-        result integer;
     begin
         if d_count > 333 THEN
              delete from products where count = 7;
