@@ -32,4 +32,4 @@ select * from products;
   4 | product_4 | producer_4 |    11 |    64
   5 | product_5 | producer_5 |    17 |    45
   6 | product_6 | producer_6 |    77 |   777
-
+commit;
