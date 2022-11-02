@@ -22,8 +22,15 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines()
-                    .map(line -> line.split(";"))
-                    .forEach(strings -> users.add(new User(strings[0], strings[1])));
+                    .forEach(line -> {
+                        String[] string = line.split(";");
+                        if (string.length != 2 || string[0].isBlank()
+                                || string[1].isBlank() || line.startsWith(";")) {
+                            throw new IllegalArgumentException(
+                                    "Wrong pattern.");
+                        }
+                    users.add(new User(string[0], string[1]));
+            });
         }
         return users;
     }
