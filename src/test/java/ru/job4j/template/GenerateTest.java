@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Disabled
 class GenerateTest {
@@ -23,9 +22,8 @@ class GenerateTest {
         Generator generator = new Generate();
         String template = "I am a ${name} ${surname}, Who are ${subject}? ";
         Map<String, String> args = Map.of("name", "Petr Arsentev", "subject", "you");
-        assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce(template, args);
-        });
+        assertThatThrownBy(() -> generator.produce(template, args)).
+                isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -34,8 +32,7 @@ class GenerateTest {
         String template = "I am a ${name}, Who are ${subject}? ";
         Map<String, String> args = Map.of("name", "Petr Arsentev", "subject", "you",
                 "surname", "Arsentev");
-        assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce(template, args);
-        });
+        assertThatThrownBy(() -> generator.produce(template, args)).
+                isInstanceOf(IllegalArgumentException.class);
     }
 }
