@@ -8,7 +8,7 @@ import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.MemStore;
-
+import javax.xml.bind.JAXBException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -89,7 +89,7 @@ class ReportEngineTest {
         store.add(worker);
         Report engine = new ReportForProgrammers(store, parser);
         StringBuilder expect = new StringBuilder()
-                .append("Name;Hired;Fired;Salary;")
+                .append("Name;Hired;Fired;Salary")
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(";")
                 .append(parser.parse(worker.getHired())).append(";")
@@ -104,9 +104,8 @@ class ReportEngineTest {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
-        DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
-        Report engine = new ReportJSON(store, parser);
+        Report engine = new ReportJSON(store);
         StringBuilder expect = new StringBuilder();
         expect.append("[")
                 .append("{").append("\"name\":\"").append(worker.getName()).append("\",")
@@ -140,7 +139,7 @@ class ReportEngineTest {
     }
 
     @Test
-    public void whenXMLGenerated() {
+    public void whenXMLGenerated() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
