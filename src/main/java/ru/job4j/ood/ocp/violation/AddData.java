@@ -12,7 +12,7 @@ public class AddData {
     расширения и этот класс придется изменять.
     Таким образом Нарушение OCP.
     */
-    private List<Employee> employees = new ArrayList<>();
+    private ArrayList<Employee> employees = new ArrayList<>();
 
     public void add(Employee em) {
         employees.add(em);
