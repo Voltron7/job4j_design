@@ -1,26 +1,18 @@
 package ru.job4j.ood.lsp.foodstorage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import static ru.job4j.ood.lsp.foodstorage.Shop.WAREHOUSE;
 
 public class Warehouse extends AbstractStore {
-    private final List<Food> warehouse = new ArrayList<>();
+    private final ExpirationCalculator<LocalDate> expirationCalculator;
 
-    @Override
-    public boolean add(Food food) {
-        if (check(food)) {
-            warehouse.add(food);
-        }
-        return false;
+    public Warehouse(ExpirationCalculator<LocalDate> expirationCalculator) {
+        this.expirationCalculator = expirationCalculator;
     }
 
     @Override
-    public List<Food> get() {
-        return new ArrayList<>(warehouse);
-    }
-
-    @Override
-    public boolean check(Food food) {
-        return ControlQuality.getPercentageOfExpiration(food) < 25;
+    protected boolean check(Food food) {
+        return expirationCalculator.calculateInPercent(
+                food.getCreateDate(), food.getExpiryDate()) < WAREHOUSE;
     }
 }
