@@ -13,7 +13,7 @@ public class Shop extends AbstractStore {
     }
 
     @Override
-    protected boolean check(Food food) {
+    protected boolean isFresh(Food food) {
         double percentage = expirationCalculator.calculateInPercent(
                 food.getCreateDate(), food.getExpiryDate());
         if (percentage > DISCOUNT && percentage < TRASH) {

@@ -11,7 +11,7 @@ public class Trash extends AbstractStore {
     }
 
     @Override
-    protected boolean check(Food food) {
+    protected boolean isFresh(Food food) {
         return expirationCalculator.calculateInPercent(
                 food.getCreateDate(), food.getExpiryDate()) >= TRASH;
     }

@@ -8,16 +8,17 @@ public abstract class AbstractStore implements Store {
 
     @Override
     public boolean add(Food food) {
-        if (check(food)) {
-            foods.add(food);
+        if (!isFresh(food)) {
+            return false;
         }
-        return false;
+        foods.add(food);
+        return true;
     }
 
     @Override
-    public List<Food> get() {
+    public List<Food> getAll() {
         return new ArrayList<>(foods);
     }
 
-    protected abstract boolean check(Food food);
+    protected abstract boolean isFresh(Food food);
 }
