@@ -1,14 +1,26 @@
 package ru.job4j.ood.lsp.parking;
 
-public class MallParking extends AbstractParking {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MallParking implements Parking {
+    private int trucksParkingCapacity;
+    private int carsParkingCapacity;
+    private final List<Vehicle> cars = new ArrayList<>();
+    private final List<Vehicle> trucks = new ArrayList<>();
 
     @Override
-    protected boolean checkCars(Vehicle vehicle) {
+    public boolean add(Vehicle vehicle) {
         return false;
     }
 
     @Override
-    protected boolean checkTrucks(Vehicle vehicle) {
-        return false;
+    public List<Vehicle> getTrucks() {
+        return null;
+    }
+
+    @Override
+    public List<Vehicle> getCars() {
+        return null;
     }
 }
