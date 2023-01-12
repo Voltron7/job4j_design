@@ -1,9 +1,11 @@
 package ru.job4j.ood.lsp.foodstorage;
 
 import java.time.LocalDate;
-import static ru.job4j.ood.lsp.foodstorage.Shop.WAREHOUSE;
 
 public class Warehouse extends AbstractStore {
+
+    private static final double FRESHNESS_LIMIT = 25;
+
     private final ExpirationCalculator<LocalDate> expirationCalculator;
 
     public Warehouse(ExpirationCalculator<LocalDate> expirationCalculator) {
@@ -13,6 +15,6 @@ public class Warehouse extends AbstractStore {
     @Override
     protected boolean isFresh(Food food) {
         return expirationCalculator.calculateInPercent(
-                food.getCreateDate(), food.getExpiryDate()) < WAREHOUSE;
+                food.getCreateDate(), food.getExpiryDate()) < FRESHNESS_LIMIT;
     }
 }

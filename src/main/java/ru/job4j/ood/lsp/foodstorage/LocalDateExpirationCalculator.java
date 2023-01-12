@@ -12,6 +12,6 @@ public class LocalDateExpirationCalculator implements ExpirationCalculator<Local
         if (elapsedTerm < 1 || fullTerm <= 1) {
             throw new IllegalArgumentException("Create date can't be the same or more as expiration date!");
         }
-        return (int) (elapsedTerm / fullTerm * 100);
+        return (elapsedTerm / fullTerm * 100);
     }
 }
