@@ -8,7 +8,7 @@ class MallParkingTest {
 
     @Test
     public void whenAddTruckAndCarIsSuccessful() {
-        MallParking mallParking = new MallParking(2, 1);
+        MallParking mallParking = new MallParking(1, 1);
         Vehicle truck = new Truck("Truck", 2);
         Vehicle car = new Car("Car");
         mallParking.add(truck);
@@ -19,7 +19,7 @@ class MallParkingTest {
 
     @Test
     public void whenAddTwoTrucksIsSuccessful() {
-        MallParking mallParking = new MallParking(5, 1);
+        MallParking mallParking = new MallParking(2, 1);
         Vehicle truck = new Truck("Truck", 2);
         Vehicle truck1 = new Truck("Truck1", 3);
         mallParking.add(truck);
@@ -39,7 +39,7 @@ class MallParkingTest {
 
     @Test
     public void whenAddTrucksAndCarsIsSuccessful() {
-        MallParking mallParking = new MallParking(5, 8);
+        MallParking mallParking = new MallParking(2, 8);
         Vehicle truck = new Truck("Truck", 3);
         Vehicle truck1 = new Truck("Truck1", 2);
         Vehicle truck2 = new Truck("Truck2", 4);

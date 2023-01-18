@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MallParking implements Parking {
+    private static final int ONE_TRUCK_PARKING_SPACE = 1;
     private int trucksParkingCapacity;
     private int carsParkingCapacity;
     private final List<Vehicle> cars;
@@ -19,9 +20,9 @@ public class MallParking implements Parking {
     @Override
     public boolean add(Vehicle vehicle) {
         if (vehicle.getSize() > 1
-                && trucksParkingCapacity >= vehicle.getSize()) {
+                && trucksParkingCapacity >= ONE_TRUCK_PARKING_SPACE) {
             trucks.add(vehicle);
-            trucksParkingCapacity -= vehicle.getSize();
+            trucksParkingCapacity -= ONE_TRUCK_PARKING_SPACE;
         } else if (carsParkingCapacity >= vehicle.getSize()) {
             cars.add(vehicle);
             carsParkingCapacity -= vehicle.getSize();
