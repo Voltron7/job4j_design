@@ -18,16 +18,24 @@ public class MallParking implements Parking {
 
     @Override
     public boolean add(Vehicle vehicle) {
+        if (vehicle.getSize() > 1
+                && trucksParkingCapacity >= vehicle.getSize()) {
+            trucks.add(vehicle);
+            trucksParkingCapacity -= vehicle.getSize();
+        } else if (carsParkingCapacity >= vehicle.getSize()) {
+            cars.add(vehicle);
+            carsParkingCapacity -= vehicle.getSize();
+        }
         return false;
     }
 
     @Override
     public List<Vehicle> getTrucks() {
-        return null;
+        return new ArrayList<>(trucks);
     }
 
     @Override
     public List<Vehicle> getCars() {
-        return null;
+        return new ArrayList<>(cars);
     }
 }
